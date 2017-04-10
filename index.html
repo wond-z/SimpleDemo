@@ -1,449 +1,254 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bootstrap Form Demo</title>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- bootstrap原样式 -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="css/bootstrap-theme.min.css"> -->
+	<!-- 日期时间选择器样式 -->
+	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" media="screen">
+	<style media="screen">
+		/* 九宫格动态效果样式 */
+		.pic img { width: 100%; height: auto; }
+		.pic img:hover {
+			-webkit-transform:scale(.9) rotate(10deg);
+			-moz-transform:scale(.9) rotate(10deg);
+			-o-transform:scale(.9) rotate(10deg);
+			transition: width 2s;
+			-moz-transition: transform 1.5s; /* Firefox 4 */
+			-webkit-transition: transform 1.5s; /* Safari 和 Chrome */
+			-o-transition: transform 1.5s; /* Opera */
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<form name="register">
+						<fieldset>
+							<legend>Bootstrap Form Demo</legend>
+							<h3>输入框</h3>
+							<div class="form-group">
+								<label for="">搜索框</label>
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="搜索">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+									</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="exampleInput">输入框</label>
+								<input type="text" class="form-control" id="exampleInput" placeholder="输入框">
+							</div>
+							<div class="form-group">
+								<label for="">下拉框</label>
+								<select class="form-control">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="">级联下拉框</label>
+								<div class="row">
+									<div class="col-md-6">
+		                                <select class="form-control" name="category" required onChange="getCompany()">
+		                                	<option value="0">单位分类</option>
+		                                	<option value="直属单位">直属单位</option>
+		    								<option value="省地震局">省地震局</option>
+		    								<option value="地震社团">地震社团</option>
+		    								<option value="其它">其它</option>
+										</select>
+		                            </div>
+		                            <div class="col-md-6">
+		                                <select class="form-control" name="company" required>
+		                                	<option value="0" disabled="disabled">单位名称</option>
+										</select>
+		                            </div>
+								</div>
+	                        </div>
+							<div class="form-group">
+				                <label for="dtp_input1">日期时间选择</label>
+				                <div class="input-group date form_datetime" data-date="1979-09-16T05:25:07Z" data-date-format="yyyy年mm月dd日 -p HH:ii" data-link-field="dtp_input1">
+				                    <input class="form-control" id="dtp_input1" size="16" type="text" value="" readonly>
+				                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+									<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+				                </div>
+				            </div>
+							<div class="form-group">
+				                <label for="dtp_input2">日期选择</label>
+				                <div class="input-group date form_date" data-date="" data-date-format="yyyy年mm月dd日" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+				                    <input class="form-control" id="dtp_input2" size="16" type="text" value="" readonly>
+				                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+				                </div>
+				            </div>
+							<div class="form-group">
+				                <label for="dtp_input3">时间选择</label>
+				                <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+				                    <input class="form-control" id="dtp_input3" size="16" type="text" value="" readonly>
+				                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+									<span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+				                </div>
+				            </div>
+							<div class="form-group">
 
-    <head>
-        <title>
-            Slack:Where work happens
-        </title>
-        <meta charset="utf-8">
-        <meta name="description" content="Slack brings all your communication together in one place. It’s real-time messaging, archiving and search for modern teams.">
-        <meta name="author" content="Slack">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Slack" />
-        <meta property="og:image" content="https://slack.com/img/slack_hash_128.v1464126652.png"
-        />
-        <meta property="og:title" content="Slack: Where work happens" />
-        <meta property="og:description" content="Slack brings all your communication together in one place. It’s real-time messaging, archiving and search for modern teams."
-        />
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:site" content="@slackhq">
-        <meta name="twitter:title" content="Slack: Where work happens">
-        <meta name="twitter:description" content="Slack brings all your communication together in one place. It’s real-time messaging, archiving and search for modern teams.">
-        <meta name="twitter:image" content="https://slack.com/img/slack_hash_twitter.v1464126652.png">
-        <link id="favicon" rel="shortcut icon" href="https://a.slack-edge.com/66f9/img/icons/favicon-32.png"
-        sizes="16x16 32x32 48x48" type="image/png" />
-        <link rel="icon" href="https://a.slack-edge.com/0180/img/icons/app-256.png"
-        sizes="256x256" type="image/png" />
-        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://a.slack-edge.com/66f9/img/icons/ios-152.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://a.slack-edge.com/66f9/img/icons/ios-144.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://a.slack-edge.com/66f9/img/icons/ios-120.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://a.slack-edge.com/66f9/img/icons/ios-114.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://a.slack-edge.com/0180/img/icons/ios-72.png" />
-        <link rel="apple-touch-icon-precomposed" href="https://a.slack-edge.com/66f9/img/icons/ios-57.png" />
-        <meta name="msapplication-TileColor" content="#FFFFFF" />
-        <meta name="msapplication-TileImage" content="https://a.slack-edge.com/66f9/img/icons/app-144.png" />
-        <!--output_css"brand_css_core"-->
-        <link href="css/rollup-brand.css" rel="stylesheet" />
-        <!--output_css"regular"-->
-        <link href="css/where_work_happens.css" rel="stylesheet" type="text/css" />
-        <link href="css/marketing_enterprise_banner.css" rel="stylesheet" type="text/css" />
-        <link href="css/page_campaign.css" rel="stylesheet" type="text/css" >
-    </head>
+							</div>
+							<h3>单选</h3>
+							<div class="radio">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+									Option one is this and that&mdash;be sure to include why it's great
+								</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+									Option two can be something else and selecting it will deselect option one
+								</label>
+							</div>
+							<div class="radio disabled">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+									Option three is disabled
+								</label>
+							</div>
+							<h3>文件上传</h3>
+							<div class="form-group">
+								<label for="exampleInputFile">File input</label>
+								<input type="file" id="exampleInputFile">
+								<p class="help-block">Example block-level help text here.</p>
+							</div>
+						</fieldset>
+					</form>
+				</div><!-- panel-body end -->
+			</div><!-- panel end -->
 
-    <body class="where_work_happens">
-        <div class="enterprise_banner">
-            <a href="/enterprise" class="enterprise_banner__content" data-clog-event="WEBSITE_CLICK"
-            data-clog-params="click_target=enterprise_banner_click">
-                <img src='https://a.slack-edge.com/01d3/img/marketing/slack_enterprise_icon.png'
-                srcset='https://a.slack-edge.com/01d3/img/marketing/slack_enterprise_icon.png 1x, https://a.slack-edge.com/01d3/img/marketing/slack_enterprise_icon@2x.png 2x'
-                class="enterprise_banner__icon" alt="">
-                <span class="enterprise_banner__text">
-                    Announcing the launch of
-                    <strong class="link">
-                        Slack Enterprise Grid
-                    </strong>
-                </span>
-            </a>
-            <button class="enterprise_banner__dismiss">
-                <ts-icon class="ts_icon ts_icon_times" aria-hidden="true">
-                </ts-icon>
-                <span class="offscreen">
-                    Hide announcement
-                </span>
-            </button>
-        </div>
-        <nav class="top no_sticky" data-no-scroll="1">
-            <a href="https://slack.com/" class="logo" data-qa="logo" data-clog-event="WEBSITE_CLICK"
-            data-clog-params="click_target=nav_logo" aria-label="Slack homepage">
-            </a>
-            <ul>
-                <li>
-                    <a href="https://slack.com/is" data-qa="product" data-clog-event="WEBSITE_CLICK"
-                    data-clog-params="click_target=nav_product">
-                        Product
-                    </a>
-                </li>
-                <li>
-                    <a href="https://slack.com/pricing" data-qa="pricing" data-clog-event="WEBSITE_CLICK"
-                    data-clog-params="click_target=nav_pricing">
-                        Pricing
-                    </a>
-                </li>
-                <li>
-                    <a href="https://get.slack.help/hc" data-qa="support" data-clog-event="WEBSITE_CLICK"
-                    data-clog-params="click_target=nav_support">
-                        Support
-                    </a>
-                </li>
-                <li class="mobile_btn download_slack">
-                    <a href="/get" data-qa="download_slack" data-clog-event="WEBSITE_CLICK"
-                    data-clog-params="click_target=nav_download">
-                        Download Slack
-                    </a>
-                </li>
-                <li>
-                    <a href="" class="opt_nav_create ga_track_signup cta_track" data-qa="create_team"
-                    data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_create_team">
-                        Create a new team
-                    </a>
-                </li>
-                <li>
-                    <a href="https://slack.com/signin/find" class="opt_nav_find" data-qa="find_team"
-                    data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_find_team">
-                        Find your team
-                    </a>
-                </li>
-                <li class="sign_in hide_on_mobile">
-                    <a href="https://slack.com/signin" class="btn_sticky btn_filled opt_nav_signin"
-                    data-qa="sign_in" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_sign_in">
-                        Sign in
-                    </a>
-                </li>
-                <li class="mobile_btn mobile_menu_btn">
-                    <a href="#" class="btn_sticky" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_mobile_menu_btn">
-                        Menu
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <nav class="mobile_menu loading menu_scroll" aria-hidden="true">
-            <div class="mobile_menu_wrapper">
-                <div class="mobile_menu_header">
-                    <a href="https://slack.com/" class="logo" data-clog-event="WEBSITE_CLICK"
-                    data-clog-params="click_target=nav_logo">
-                    </a>
-                    <a href="#" class="close" aria-label="close" data-clog-event="WEBSITE_CLICK"
-                    data-clog-params="click_target=nav_menu_close">
-                        <ts-icon class="ts_icon ts_icon_times">
-                        </ts-icon>
-                    </a>
-                </div>
-                <ul>
-                    <li>
-                        <a href="https://slack.com/is" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_product">
-                            Product
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://slack.com/pricing" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_pricing">
-                            Pricing
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://get.slack.help/hc" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_support">
-                            Support
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/get" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_download">
-                            Download
-                            <span class="optional_desktop_nav_message">
-                                the Slack app
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="mobile_menu_footer">
-                    <li>
-                        <a href="https://slack.com/signin" class="opt_nav_signin" target="_blank"
-                        data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_sign_in">
-                            <ts-icon class="ts_icon small float_none team_icon ts_icon_plus default signup_icon">
-                            </ts-icon>
-                            <span class="switcher_label">
-                                Sign in
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://slack.com/create" class="ga_track_signup opt_nav_create cta_track"
-                        target="_blank" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_create_team">
-                            <ts-icon class="ts_icon small float_none team_icon ts_icon_slack_pillow default signup_icon">
-                            </ts-icon>
-                            <span class="switcher_label">
-                                Create a new team
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+			<!-- panel start -->
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-6" style="border-right: 1px solid #ccc;">
+							<div class="row">
+								<div class="col-md-4 pic">
+									<img src="img/1.png" alt="">
+								</div>
+								<div class="col-md-4 pic">
+									<img src="img/2.png" alt="">
+								</div>
+								<div class="col-md-4 pic">
+									<img src="img/3.png" alt="">
+								</div>
+								<div class="col-md-4 pic">
+									<img src="img/4.png" alt="">
+								</div>
+								<div class="col-md-4 pic">
+									<img src="img/1.png" alt="">
+								</div>
+								<div class="col-md-4 pic">
+									<img src="img/2.png" alt="">
+								</div>
+								<div class="col-md-4 pic">
+									<img src="img/3.png" alt="">
+								</div>
+								<div class="col-md-4 pic">
+									<img src="img/4.png" alt="">
+								</div>
+								<div class="col-md-4 pic">
+									<img src="img/1.png" alt="">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" style="border-bottom: 1px solid #ccc;">
+							<form class="form-horizontal">
+								<fieldset>
+									<legend>静态控件</legend>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Email</label>
+										<div class="col-sm-10">
+											<p class="form-control-static">email@example.com</p>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputPassword" class="col-sm-2 control-label">Password</label>
+										<div class="col-sm-10">
+											<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+										</div>
+									</div>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div><!-- panel end -->
+		</div><!-- row end -->
+	</div><!-- container end -->
 
-        <div class="outer-wrapper">
-            <div id="where_work_happens" class="section  animate_svg ">
-                <div id="where_work_happens_svg_wrapper">
-                </div>
-                <div class="content">
-                    <div class="wrapper">
-                        <h1 data-shadow-text="Where work" data-shadow-text-mobile="Where work happens"
-                        class="headline">
-                            Where
-                            <br class="mobile-only">
-                            work
-                            <sup class="asterisk">
-                                *
-                            </sup>
-                            <br>
-                            happens.
-                        </h1>
-                        <div class="cta_wrapper">
-                            <p class="subhead">
-                                <span id="where_work_happens_illo_mobile">
-                                </span>
-                                <span class="asterisk alt">
-                                    *
-                                </span>
-                                Whatever work means for you,Slack brings all the pieces and
-                                <br class="not-mobile">
-                                people you need together so you can actually get things done.
-                            </p>
-                            <div class="cta">
-                                <form action="/create" method="post" class="cta_form align_middle" novalidate>
-                                    <input type="hidden" name="done" value="1">
-                                    <input type="hidden" name="crumb" value="s-1487643630-ae913e14f8-?" />
-                                    <span class="cta_input_email_wrapper">
-                                        <input name="email" type="email" spellcheck="false" id="inline_input"
-                                        placeholder="Email address" class="input_email input_inline small_right_margin"
-                                        data-email-healing="true">
-                                    </span>
-                                    <button type="submit" class="btn align_top ga_track_signup" data-qa="create_new_team"
-                                    data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=cta_create_new_team">
-                                        Create a new team
-                                    </button>
-                                </form>
-                                <span class="cta_footer">
-                                    Your team already uses Slack?
-                                    <a href="/signin" class="opt_cta_signin" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=cta_footer_sign_in">
-                                        Sign in
-                                    </a>
-                                    or
-                                    <a href="/signin/find" class="opt_cta_find" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=cta_footer_find_your_team">
-                                        find your team
-                                    </a>
-                                    .
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <footer data-qa="footer">
-                <section class="links">
-                    <div class="grid">
-                        <div class="col span_1_of_4 nav_col">
-                            <ul>
-                                <li class="cat_1">
-                                    Using Slack
-                                </li>
-                                <li>
-                                    <a href="/is" data-qa="product_footer" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_product">
-                                        Product
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/pricing" data-qa="pricing_footer" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_pricing">
-                                        Pricing
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://get.slack.help/hc" data-qa="support_footer" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_support">
-                                        Support
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/guides" data-qa="getting_started" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_getting_started">
-                                        Slack Guides
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/videoguides" data-qa="video_guides" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_video_guides">
-                                        Video Guides
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/apps" data-qa="app_directory" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_app_directory">
-                                        App Directory
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://api.slack.com/" data-qa="api" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_api">
-                                        API
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col span_1_of_4 nav_col">
-                            <ul>
-                                <li class="cat_2">
-                                    Slack
-                                    <ts-icon class="ts_icon_heart">
-                                    </ts-icon>
-                                </li>
-                                <li>
-                                    <a href="/jobs" data-qa="jobs" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_jobs">
-                                        Jobs
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/customers" data-qa="customers" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_customers">
-                                        Customers
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/developers" data-qa="developers" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_developers">
-                                        Developers
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/events" data-qa="events" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_events">
-                                        Events
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://slackhq.com/" data-qa="blog_footer" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_blog">
-                                        Blog
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/podcast" data-qa="podcast" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_podcast">
-                                        Podcast
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://slack.shop/" data-qa="slack_shop" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_slack_shop">
-                                        Slack Shop
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col span_1_of_4 nav_col">
-                            <ul>
-                                <li class="cat_3">
-                                    Legal
-                                </li>
-                                <li>
-                                    <a href="/privacy-policy" data-qa="privacy" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_privacy">
-                                        Privacy
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/security" data-qa="security" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_security">
-                                        Security
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/terms-of-service" data-qa="tos" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_tos">
-                                        Terms of Service
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/policies" data-qa="policies" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_policies">
-                                        Policies
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col span_1_of_4 nav_col">
-                            <ul>
-                                <li class="cat_4">
-                                    Handy Links
-                                </li>
-                                <li>
-                                    <a href="/downloads" data-qa="downloads" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_downloads">
-                                        Download desktop app
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/downloads" data-qa="downloads_mobile" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_downloads_mobile">
-                                        Download mobile app
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/brand-guidelines" data-qa="brand_guidelines" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_brand_guidelines">
-                                        Brand Guidelines
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://slackatwork.com" data-qa="slack_at_work" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_slack_at_work">
-                                        Slack at Work
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://status.slack.com/" data-qa="status" data-clog-event="WEBSITE_CLICK"
-                                    data-clog-params="click_target=footer_status">
-                                        Status
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-                <div class="footnote">
-                    <section>
-                        <a href="https://slack.com" aria-label="Slack homepage" data-clog-event="WEBSITE_CLICK"
-                        data-clog-params="click_target=footer_slack_icon">
-                            <ts-icon class="ts_icon_slack_pillow" aria-hidden="true">
-                            </ts-icon>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="/help/contact" data-qa="contact_us" data-clog-event="WEBSITE_CLICK"
-                                data-clog-params="click_target=footer_contact_us">
-                                    Contact Us
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/SlackHQ" data-qa="slack_twitter" data-clog-event="WEBSITE_CLICK"
-                                data-clog-params="click_target=footer_slack_twitter" aria-label="Slack on Twitter">
-                                    <ts-icon class="ts_icon_twitter" aria-hidden="true">
-                                    </ts-icon>
-                                </a>
-                            </li>
-                            <li class="yt">
-                                <a href="https://www.youtube.com/channel/UCY3YECgeBcLCzIrFLP4gblw" data-qa="slack_youtube"
-                                data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_slack_youtube"
-                                aria-label="Slack on YouTube">
-                                    <ts-icon class="ts_icon_youtube" aria-hidden="true">
-                                    </ts-icon>
-                                </a>
-                            </li>
-                        </ul>
-                    </section>
-                </div>
-            </footer>
-        </div>
-    </body>
+	<script type="text/javascript" charset="UTF-8" src="jquery/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="js/bootstrap-datetimepicker.js"></script><!-- 日期时间选择器脚本 -->
+	<script type="text/javascript" charset="UTF-8" src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script><!-- 日期时间选择器语言控制脚本 -->
 
+	<script type="text/javascript">
+
+		// 日期时间选择器激活
+	    $('.form_datetime').datetimepicker({
+	        language:  'zh-CN',
+	        weekStart: 1,
+	        todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			forceParse: 0,
+	        showMeridian: 1
+	    });
+		$('.form_date').datetimepicker({
+	        language:  'zh-CN',
+	        weekStart: 1,
+	        todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+	    });
+		$('.form_time').datetimepicker({
+	        language:  'zh-CN',
+	        weekStart: 1,
+	        todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 1,
+			minView: 0,
+			maxView: 1,
+			forceParse: 0
+	    });
+
+		// 级联下拉框控制
+		var companyList = [
+			["地球物理研究所","地质研究所","地壳应力研究所","地震预测研究所", "工程力学研究所", "中国地震台网中心", "中国地震应急搜救中心", "中国地震灾害防御中心", "地壳运动监测工程研究中心", "地球物理勘探中心", "第一监测中心", "第二监测中心", "地震出版社", "防灾科技学院", "机关服务中心", "深圳防震减灾科技交流培训中心"],
+			["北京地震局","天津地震局","河北地震局","山西地震局", "辽宁地震局", "吉林地震局", "上海地震局", "江苏地震局", "浙江地震局", "安徽地震局", "福建地震局", "江西地震局", "山东地震局", "河南地震局", "湖北地震局", "湖南地震局", "广东地震局", "广西地震局", "海南地震局", "重庆地震局", "四川地震局", "贵州地震局", "云南地震局", "西藏地震局", "陕西地震局", "甘肃地震局", "青海地震局", "宁夏地震局", "新疆地震局", "内蒙古地震局", "黑龙江地震局"],
+			["中国地震学会","中国地球物理学会","中国地质学会","中国力学学会"],
+			["其它"]
+		];
+		function getCompany(){
+        	var category = document.register.category;
+        	var company = document.register.company;
+        	var comList = companyList[category.selectedIndex - 1];
+        	company.length = 1;
+			for(var i=0;i<comList.length;i++){
+				company[i+1]=new Option(comList[i],comList[i]);
+		    }
+		}
+	</script>
+</body>
 </html>
