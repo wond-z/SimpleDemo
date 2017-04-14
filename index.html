@@ -12,6 +12,9 @@
 	<!-- 日期时间选择器样式 -->
 	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" media="screen">
 	<style media="screen">
+		body {
+			padding: 50px 0;
+		}
 		/* 九宫格动态效果样式 */
 		.pic img { width: 100%; height: auto; }
 		.pic img:hover {
@@ -22,6 +25,24 @@
 			-moz-transition: transform 1.5s; /* Firefox 4 */
 			-webkit-transition: transform 1.5s; /* Safari 和 Chrome */
 			-o-transition: transform 1.5s; /* Opera */
+		}
+
+		/* 自定义长度 */
+		.real-dom {
+			margin: auto;
+			width: 800px;
+			text-align: center;
+		}
+		.real-dom label {
+			width: 50px;
+		}
+		.real-dom input.form-control {
+			width: 650px;
+		}
+
+		/*  button-list(自定义布局样式) */
+		.button-list {
+			padding-top: 15px;
 		}
 	</style>
 </head>
@@ -78,7 +99,7 @@
 	                        </div>
 							<div class="form-group">
 				                <label for="dtp_input1">日期时间选择</label>
-				                <div class="input-group date form_datetime" data-date="1979-09-16T05:25:07Z" data-date-format="yyyy年mm月dd日 -p HH:ii" data-link-field="dtp_input1">
+				                <div class="input-group date form_datetime" data-date="" data-date-format="yyyy-mm-dd -p HH:ii" data-link-field="dtp_input1">
 				                    <input class="form-control" id="dtp_input1" size="16" type="text" value="" readonly>
 				                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 									<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
@@ -86,7 +107,7 @@
 				            </div>
 							<div class="form-group">
 				                <label for="dtp_input2">日期选择</label>
-				                <div class="input-group date form_date" data-date="" data-date-format="yyyy年mm月dd日" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+				                <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
 				                    <input class="form-control" id="dtp_input2" size="16" type="text" value="" readonly>
 				                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -100,9 +121,6 @@
 									<span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
 				                </div>
 				            </div>
-							<div class="form-group">
-
-							</div>
 							<h3>单选</h3>
 							<div class="radio">
 								<label>
@@ -127,6 +145,16 @@
 								<label for="exampleInputFile">File input</label>
 								<input type="file" id="exampleInputFile">
 								<p class="help-block">Example block-level help text here.</p>
+							</div>
+							<div class="form-group">
+								<label for="">File input with style</label>
+								<div class="input-group">
+									<input type="text" class="form-control" id="photoCover" disabled>
+									<input id="lefile" type="file" class="form-control" style="display:none">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button" onclick="$('input[id=lefile]').click();"><span class="glyphicon glyphicon-open"></span> 上传文件</button>
+									</span>
+								</div>
 							</div>
 						</fieldset>
 					</form>
@@ -187,9 +215,42 @@
 								</fieldset>
 							</form>
 						</div>
+						<div class="col-md-3 button-list">
+							<p><button type="button" class="btn btn-default">（默认样式）Default</button></p>
+							<p><button type="button" class="btn btn-primary">（首选项）Primary</button></p>
+							<p><button type="button" class="btn btn-success">（成功）Success</button></p>
+							<p><button type="button" class="btn btn-info">（一般信息）Info</button></p>
+							<p><button type="button" class="btn btn-warning">（警告）Warning</button></p>
+							<p><button type="button" class="btn btn-danger">（危险）Danger</button></p>
+							<p><button type="button" class="btn btn-link">（链接）Link</button></p>
+						</div>
+						<div class="col-md-3 button-list">
+							<p><a class="btn btn-default" href="#" role="button">Link</a></p>
+							<p><button class="btn btn-default" type="submit">Button</button></p>
+							<p><input class="btn btn-default" type="button" value="Input"></p>
+							<p><input class="btn btn-default" type="submit" value="Submit"></p>
+						</div>
 					</div>
 				</div>
 			</div><!-- panel end -->
+			<div class="real-dom">
+				<form class="form-inline">
+					<fieldset>
+						<legend class="text-left">内联表单</legend>
+						<div class="form-group">
+							<label for="username" class="control-label">用户名</label>
+							<input type="password" class="form-control" id="username" placeholder="用户名">
+						</div>
+
+						<div class="form-group">
+							<br />
+							<label for="inputPassword" class="control-label">密码</label>
+							<input type="password" class="form-control" id="inputPassword" placeholder="密码">
+						</div>
+					</fieldset>
+				</form>
+			</div>
+
 		</div><!-- row end -->
 	</div><!-- container end -->
 
@@ -249,6 +310,11 @@
 				company[i+1]=new Option(comList[i],comList[i]);
 		    }
 		}
+
+		// 上传文件样式修改
+		$("input[id=lefile]").change(function() {
+			$('#photoCover').val($(this).val());
+		});
 	</script>
 </body>
 </html>
