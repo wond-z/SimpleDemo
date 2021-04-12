@@ -27,6 +27,11 @@ Simple webpage,widget and plug-in demos
 
 ![image](https://user-images.githubusercontent.com/12270320/110270967-01000300-8002-11eb-92da-b33d8515f326.png)
 
+
+### segment-display 二极管显示时间
+
+![image](https://user-images.githubusercontent.com/12270320/114356541-51d7be00-9ba3-11eb-9bda-064b0b5cfe87.png)
+
 ## branch list
 
 **Bootstrap-Form-Demo**  
