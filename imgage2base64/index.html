@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<div>
+	 	<!--accept只能与file配合使用。它可以限制上传的文件类型。当然你也可以写成 accept="image/*"-->
+	    <input type="file" id="myimg" onchange="imgChange(this)" accept="image/png,image/gif,image/jpeg" multiple/>
+	    <!-- <img width="300px" src="" alt=""> -->
+	</div>
+	<script>
+        let picBase64 = [];
+
+	    function imgChange(img) {
+		    // 生成一个文件读取的对象
+		    const reader = new FileReader();
+		    var picLength = img.files.length;
+		    var index = 0;
+		    reader.onload = function (ev) {
+                picBase64.push(ev.target.result);
+		        // base64码
+		        var imgFile =ev.target.result;//或e.target都是一样的
+		        var dom = document.createElement('img');
+		        dom.setAttribute('src', ev.target.result);
+		        dom.style.width = '300px';
+		        document.body.appendChild(dom);
+		        if (index < picLength) {
+		        	reader.readAsDataURL(img.files[index]);
+		        	index++;
+		        } else {
+                    // 获取到所有图片的base64编码数组
+                    console.log(picBase64);
+                }
+		    }
+		    //发起异步读取文件请求，读取结果为data:url的字符串形式，
+		    reader.readAsDataURL(img.files[index]);
+		    index++;
+		}
+	</script>
+</body>
+</html>
