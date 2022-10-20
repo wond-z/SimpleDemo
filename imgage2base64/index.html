@@ -12,7 +12,17 @@
 	    <!-- <img width="300px" src="" alt=""> -->
 	</div>
 	<script>
+        // 图片转base64且进行压缩实现思路
+        //
+        // input 读取到 文件 ，使用 FileReader 将其转换为 base64 编码
+        // 新建 img ，使其 src 指向刚刚的 base64
+        // 新建 canvas ，将 img 画到 canvas 上
+        // 利用 canvas.toDataURL/toBlob 将 canvas 导出为 base64 或 Blob
+        // 将 base64 或 Blob 转化为 File
+        // 将这些步骤逐个拆解，我们会发现似乎在canvas.toDataURL时涉及到图片质量，那咱们就从这里下手。
+
         let picBase64 = [];
+        let picBase64Mini = [];
 
 	    function imgChange(img) {
 		    // 生成一个文件读取的对象
@@ -20,25 +30,47 @@
 		    var picLength = img.files.length;
 		    var index = 0;
 		    reader.onload = function (ev) {
-                picBase64.push(ev.target.result);
-		        // base64码
-		        var imgFile =ev.target.result;//或e.target都是一样的
-		        var dom = document.createElement('img');
-		        dom.setAttribute('src', ev.target.result);
-		        dom.style.width = '300px';
-		        document.body.appendChild(dom);
-		        if (index < picLength) {
-		        	reader.readAsDataURL(img.files[index]);
-		        	index++;
-		        } else {
-                    // 获取到所有图片的base64编码数组
-                    console.log(picBase64);
+                // 当前图片的base64编码
+                const src = ev.target.result;
+                appendImgToBody(src);
+                picBase64.push(src);
+                const image = new Image();
+                image.onload = function () {
+                    const canvas = document.createElement('canvas') // 创建 canvas 元素
+                    canvas.width = image.width
+                    canvas.height = image.height
+                    canvas.getContext('2d').drawImage(image, 0, 0, image.width, image.height) // 绘制 canvas
+                    // canvas转图片后base64编码
+                    const canvasURL = canvas.toDataURL('image/jpeg', 0.5);
+                    appendImgToBody(canvasURL);
+                    picBase64Mini.push(canvasURL);
+
+                    if (index < picLength) {
+    		        	reader.readAsDataURL(img.files[index]);
+    		        	index++;
+    		        } else {
+                        // 获取到所有图片的base64编码数组
+                        console.log(picBase64);
+                        console.log(picBase64[2].length);
+                        // 获取到所有mini后的图片的base64编码数组
+                        console.log(picBase64Mini);
+                        console.log(picBase64Mini[2].length);
+                    }
                 }
+                image.src = src;
 		    }
 		    //发起异步读取文件请求，读取结果为data:url的字符串形式，
 		    reader.readAsDataURL(img.files[index]);
 		    index++;
 		}
+
+        function appendImgToBody(src) {
+            var imgFile = src; // 或e.target都是一样的
+            var dom = document.createElement('img');
+            dom.setAttribute('src', src);
+            dom.style.width = '300px';
+            document.body.appendChild(dom);
+        }
 	</script>
 </body>
 </html>
