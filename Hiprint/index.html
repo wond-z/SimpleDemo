@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Hiprint打印模板编辑器</title>
+        <!-- hiprint -->
+        <link href="./css/hiprint.css" rel="stylesheet">
+        <link href="./css/print-lock.css" rel="stylesheet">
+        <link href="./css/print-lock.css" media="print" rel="stylesheet">
+
+        <script src="./jquery.min.js" charset="utf-8"></script>
+        <!-- hiprint 核心js-->
+        <script src="./hiprint.bundle.js"></script>
+        <!-- 兼容依赖 -->
+        <script src="./polyfill.min.js"></script>
+
+        <script src="plugins/jquery.minicolors.min.js"></script>
+        <!-- 二维码和条形码 -->
+        <script src="./plugins/JsBarcode.all.min.js" charset="utf-8"></script>
+        <script src="./plugins/qrcode.js" charset="utf-8"></script>
+        <!-- 调用浏览器打印窗口helper类，可自行替换-->
+        <script src="./plugins/jquery.hiwprint.js"></script>
+
+        <!-- bootstrap、font-awesome -->
+        <link href="./bootstrap-3.4.1-dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div class="container-fluid height-100-per print-content">
+            <div class="row">
+                <div class="col-sm-3 col-md-2">
+                    <div class="rect-printElement-types hiprintEpContainer">
+                        <ul class="hiprint-printElement-type">
+                            <li>
+                                <span class="title"><i class="fa fa-cubes"></i> 拖拽列表</span>
+                                <ul>
+                                    <li>
+                                        <a class="ep-draggable-item" tid="testModule.text" style="">
+
+                                            <span class="glyphicon glyphicon-text-width" aria-hidden="true"></span>
+                                            <span class="glyphicon-class">文本</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="ep-draggable-item" tid="testModule.image" style="">
+                                            <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                            <span class="glyphicon-class">图片</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="ep-draggable-item" tid="testModule.longText">
+                                            <span class="glyphicon glyphicon-subscript" aria-hidden="true"></span>
+                                            <span class="glyphicon-class">长文</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="ep-draggable-item" tid="testModule.tableCustom" style="">
+                                            <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                                            <span class="glyphicon-class">表格</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="ep-draggable-item" tid="testModule.html">
+                                            <span class="glyphicon glyphicon-header" aria-hidden="true"></span>
+                                            <span class="glyphicon-class">html</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="title"><i class="fa fa-cubes"></i>辅助</span>
+                                <ul>
+                                    <li>
+                                        <a class="ep-draggable-item" tid="testModule.hline" style="">
+                                            <span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span>
+                                            <span class="glyphicon-class">横线</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="ep-draggable-item" tid="testModule.vline" style="">
+                                            <span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span>
+                                            <span class="glyphicon-class">竖线</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="ep-draggable-item" tid="testModule.rect">
+                                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                                            <span class="glyphicon-class">矩形</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="ep-draggable-item" tid="testModule.oval">
+                                            <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
+                                            <span class="glyphicon-class">椭圆</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-8">
+                    <div id="hiprint-printTemplate" class="hiprint-printTemplate" style="margin-top:20px;"></div>
+                </div>
+                <div class="col-sm-3 col-md-2">
+                    <div id="PrintElementOptionSetting"></div>
+                </div>
+            </div>
+        </div>
+        <!-- 创建拖拽元素时动态生成的dom元素 -->
+        <script src="./custom_test/custom-etype-provider.js"></script>
+        <!-- 默认模板数据 -->
+        <!-- <script src="./custom_test/custom-print-json.js"></script> -->
+        <script type="text/javascript">
+            var hiprintTemplate;
+            $(document).ready(function () {
+
+                //初始化打印插件
+                hiprint.init({
+                    providers: [new customElementTypeProvider()]
+                });
+
+                // hiprint.PrintElementTypeManager.build('.hiprintEpContainer', 'testModule');
+                //设置左侧拖拽事件
+                hiprint.PrintElementTypeManager.buildByHtml($('.ep-draggable-item'));
+
+                hiprintTemplate = new hiprint.PrintTemplate({
+                    // template: customPrintJson,
+                    settingContainer: '#PrintElementOptionSetting',
+                    paginationContainer: '.hiprint-printPagination'
+                });
+
+                //打印设计
+                hiprintTemplate.design('#hiprint-printTemplate');
+            });
+        </script>
+    </body>
+</html>
