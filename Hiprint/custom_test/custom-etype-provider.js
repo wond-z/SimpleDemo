@@ -7,7 +7,7 @@ var customElementTypeProvider = (function () {
                 [
                     new hiprint.PrintElementTypeGroup("常规", [
                         { tid: 'testModule.text', text: '文本', data: '', type: 'text' },
-                        { tid: 'testModule.image', text: '图片', data: '/Content/assets/hi.png', type: 'image' },
+                        { tid: 'testModule.image', text: '图片', data: './img/hi.png', type: 'image' },
                         { tid: 'testModule.longText', text: '长文', data: '', type: 'longText' },
                         {
                             tid: 'testModule.table', field: 'table', text: '表格',

@@ -661,8 +661,8 @@ font-weight: normal;*/
 
 .hiprint_rul_wrapper {
     position: absolute;
-    height: 100%;
-    width: 100%;
+    width: calc(100% + 16px);
+    height: calc(100% + 16px);
     overflow: hidden;
     pointer-events: none;
     border: 0;

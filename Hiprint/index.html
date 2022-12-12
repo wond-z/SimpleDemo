@@ -4,26 +4,25 @@
         <meta charset="utf-8">
         <title>Hiprint打印模板编辑器</title>
         <!-- hiprint -->
-        <link href="./css/hiprint.css" rel="stylesheet">
-        <link href="./css/print-lock.css" rel="stylesheet">
-        <link href="./css/print-lock.css" media="print" rel="stylesheet">
-
-        <script src="./jquery.min.js" charset="utf-8"></script>
-        <!-- hiprint 核心js-->
-        <script src="./hiprint.bundle.js"></script>
-        <!-- 兼容依赖 -->
-        <script src="./polyfill.min.js"></script>
-
-        <script src="plugins/jquery.minicolors.min.js"></script>
-        <!-- 二维码和条形码 -->
-        <script src="./plugins/JsBarcode.all.min.js" charset="utf-8"></script>
-        <script src="./plugins/qrcode.js" charset="utf-8"></script>
-        <!-- 调用浏览器打印窗口helper类，可自行替换-->
-        <script src="./plugins/jquery.hiwprint.js"></script>
-
+        <link href="./libs/hiprint/hiprint.css" rel="stylesheet">
+        <link href="./libs/hiprint/print-lock.css" rel="stylesheet">
+        <link href="./libs/hiprint/print-lock.css" media="print" rel="stylesheet">
         <!-- bootstrap、font-awesome -->
-        <link href="./bootstrap-3.4.1-dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+        <link href="./libs/bootstrap-3.4.1-dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- <link rel="stylesheet" href="../libs/font-awesome-4.7.0/css/font-awesome.min.css"> -->
+        <script src="./libs/jquery.min.js" charset="utf-8"></script>
+        <!-- hiprint 核心js-->
+        <script src="./libs/hiprint/hiprint.bundle.js"></script>
+        <!-- 兼容依赖 -->
+        <script src="./libs/polyfill.min.js"></script>
+
+        <script src="./libs/plugins/jquery.minicolors.min.js"></script>
+        <!-- 二维码和条形码 -->
+        <script src="./libs/plugins/JsBarcode.all.min.js" charset="utf-8"></script>
+        <script src="./libs/plugins/qrcode.js" charset="utf-8"></script>
+        <!-- 调用浏览器打印窗口helper类，可自行替换-->
+        <script src="./libs/plugins/jquery.hiwprint.js"></script>
+
     </head>
     <body>
         <div class="container-fluid height-100-per print-content">
@@ -100,6 +99,31 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-8">
+                    <div class="hiprint-toolbar" style="margin-top:15px;">
+                        <ul>
+                            <li><a class="hiprint-toolbar-item" onclick="setPaper('A3')">A3</a></li>
+                            <li><a class="hiprint-toolbar-item" onclick="setPaper('A4')">A4</a></li>
+                            <li><a class="hiprint-toolbar-item" onclick="setPaper('A5')">A5</a></li>
+                            <li><a class="hiprint-toolbar-item" onclick="setPaper('B3')">B3</a></li>
+                            <li><a class="hiprint-toolbar-item" onclick="setPaper('B4')">B4</a></li>
+                            <li><a class="hiprint-toolbar-item" onclick="setPaper('B5')">B5</a></li>
+
+                            <li><a class="hiprint-toolbar-item"><input type="text" id="customWidth" style="width: 50px;height: 19px;border: 0px;" placeholder="宽/mm" /></a></li>
+                            <li><a class="hiprint-toolbar-item"><input type="text" id="customHeight" style="width: 50px;height: 19px;border: 0px;" placeholder="高/mm" /></a></li>
+
+                            <li><a class="hiprint-toolbar-item" onclick="setPaper($('#customWidth').val(),$('#customHeight').val())">自定义</a></li>
+                            <li><a class="hiprint-toolbar-item" onclick="rotatePaper()">旋转</a></li>
+                            <li><a class="hiprint-toolbar-item" onclick="clearTemplate()">清空</a></li>
+
+                            <li>
+                                <a class="btn hiprint-toolbar-item " id="A4_preview">快速预览</a>
+                            </li>
+                            <li>
+                                <a id="A4_directPrint" class="btn hiprint-toolbar-item">打印</a>
+                            </li>
+                        </ul>
+                        <div style="clear:both;"></div>
+                    </div>
                     <div id="hiprint-printTemplate" class="hiprint-printTemplate" style="margin-top:20px;"></div>
                 </div>
                 <div class="col-sm-3 col-md-2">
@@ -132,6 +156,16 @@
 
                 //打印设计
                 hiprintTemplate.design('#hiprint-printTemplate');
+
+                // 页面初始化完成后展示页面配置区域
+                $('.hiprint-printPanel').click();
+                // 自定义监听脚本
+                document.onkeydown = function (event) {
+                    if (event.keyCode === 46) {
+                        $('.hiprint-option-item-deleteBtn').click();
+                        $('.hiprint-printPanel').click();
+                    }
+                }
             });
         </script>
     </body>

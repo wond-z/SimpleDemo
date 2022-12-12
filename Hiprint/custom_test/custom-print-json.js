@@ -52,7 +52,7 @@ var customPrintJson = {
                 "top": 61.5,
                 "height": 48,
                 "width": 87,
-                "src": "/Content/assets/hi.png"
+                "src": "./img/hi.png"
             },
             "printElementType": {
                 "title": "图片",

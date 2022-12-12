@@ -41,7 +41,7 @@
 
 
 
-                        { tid: 'configModule.image', title: '图片', data: '/hi.png', type: 'image' },
+                        { tid: 'configModule.image', title: '图片', data: './img/hi.png', type: 'image' },
                         //{ tid: 'testModule.longText', title: '长文', data: '155123456789', type: 'longText' },
                         {
                             tid: 'configModule.workExperience', field: 'workExperience', title: '工作经历',
