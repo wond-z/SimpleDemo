@@ -10,6 +10,7 @@
         <!-- bootstrap、font-awesome -->
         <link href="./libs/bootstrap-3.4.1-dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- <link rel="stylesheet" href="../libs/font-awesome-4.7.0/css/font-awesome.min.css"> -->
+        <link href="./custom/custom.css" rel="stylesheet">
         <script src="./libs/jquery.min.js" charset="utf-8"></script>
         <!-- hiprint 核心js-->
         <script src="./libs/hiprint/hiprint.bundle.js"></script>
@@ -22,7 +23,7 @@
         <script src="./libs/plugins/qrcode.js" charset="utf-8"></script>
         <!-- 调用浏览器打印窗口helper类，可自行替换-->
         <script src="./libs/plugins/jquery.hiwprint.js"></script>
-
+        <script src="./libs/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
     </head>
     <body>
         <div class="container-fluid height-100-per print-content">
@@ -31,17 +32,16 @@
                     <div class="rect-printElement-types hiprintEpContainer">
                         <ul class="hiprint-printElement-type">
                             <li>
-                                <span class="title"><i class="fa fa-cubes"></i> 拖拽列表</span>
+                                <span class="title"><span class="glyphicon glyphicon-th"></span> 拖拽列表</span>
                                 <ul>
                                     <li>
-                                        <a class="ep-draggable-item" tid="testModule.text" style="">
-
+                                        <a class="ep-draggable-item" tid="testModule.text">
                                             <span class="glyphicon glyphicon-text-width" aria-hidden="true"></span>
                                             <span class="glyphicon-class">文本</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="ep-draggable-item" tid="testModule.image" style="">
+                                        <a class="ep-draggable-item" tid="testModule.image">
                                             <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
                                             <span class="glyphicon-class">图片</span>
                                         </a>
@@ -53,7 +53,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="ep-draggable-item" tid="testModule.tableCustom" style="">
+                                        <a class="ep-draggable-item" tid="testModule.tableCustom">
                                             <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
                                             <span class="glyphicon-class">表格</span>
                                         </a>
@@ -70,13 +70,13 @@
                                 <span class="title"><i class="fa fa-cubes"></i>辅助</span>
                                 <ul>
                                     <li>
-                                        <a class="ep-draggable-item" tid="testModule.hline" style="">
+                                        <a class="ep-draggable-item" tid="testModule.hline">
                                             <span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span>
                                             <span class="glyphicon-class">横线</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="ep-draggable-item" tid="testModule.vline" style="">
+                                        <a class="ep-draggable-item" tid="testModule.vline">
                                             <span class="glyphicon glyphicon-resize-vertical" aria-hidden="true"></span>
                                             <span class="glyphicon-class">竖线</span>
                                         </a>
@@ -98,43 +98,68 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-8">
-                    <div class="hiprint-toolbar" style="margin-top:15px;">
-                        <ul>
-                            <li><a class="hiprint-toolbar-item" onclick="setPaper('A3')">A3</a></li>
-                            <li><a class="hiprint-toolbar-item" onclick="setPaper('A4')">A4</a></li>
-                            <li><a class="hiprint-toolbar-item" onclick="setPaper('A5')">A5</a></li>
-                            <li><a class="hiprint-toolbar-item" onclick="setPaper('B3')">B3</a></li>
-                            <li><a class="hiprint-toolbar-item" onclick="setPaper('B4')">B4</a></li>
-                            <li><a class="hiprint-toolbar-item" onclick="setPaper('B5')">B5</a></li>
+                <div class="col-sm-6 col-md-8 m-t-15">
+                    <div class="form-inline">
+                        <label>尺寸设置</label>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                            <button type="button" class="btn btn-default" onclick="setPaper('A3')">A3</button>
+                            <button type="button" class="btn btn-default" onclick="setPaper('A4')">A4</button>
+                            <button type="button" class="btn btn-default" onclick="setPaper('A5')">A5</button>
+                            <button type="button" class="btn btn-default" onclick="setPaper('B3')">B3</button>
+                            <button type="button" class="btn btn-default" onclick="setPaper('B4')">B4</button>
+                            <button type="button" class="btn btn-default" onclick="setPaper('B5')">B5</button>
 
-                            <li><a class="hiprint-toolbar-item"><input type="text" id="customWidth" style="width: 50px;height: 19px;border: 0px;" placeholder="宽/mm" /></a></li>
-                            <li><a class="hiprint-toolbar-item"><input type="text" id="customHeight" style="width: 50px;height: 19px;border: 0px;" placeholder="高/mm" /></a></li>
-
-                            <li><a class="hiprint-toolbar-item" onclick="setPaper($('#customWidth').val(),$('#customHeight').val())">自定义</a></li>
-                            <li><a class="hiprint-toolbar-item" onclick="rotatePaper()">旋转</a></li>
-                            <li><a class="hiprint-toolbar-item" onclick="clearTemplate()">清空</a></li>
-
-                            <li>
-                                <a class="btn hiprint-toolbar-item " id="A4_preview">快速预览</a>
-                            </li>
-                            <li>
-                                <a id="A4_directPrint" class="btn hiprint-toolbar-item">打印</a>
-                            </li>
-                        </ul>
-                        <div style="clear:both;"></div>
+                            <div class="form-group m-l-20">
+                                <label>宽</label>
+                                <input type="text" class="form-control input-sm page-size-custom" id="customWidth" placeholder="mm">
+                            </div>
+                            <div class="form-group">
+                                <label>× 高</label>
+                                <input type="text" class="form-control input-sm page-size-custom" id="customHeight" placeholder="mm">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success btn-sm" onclick="setPaper($('#customWidth').val(),$('#customHeight').val())">确定</button>
+                            </div>
+                            <div class="form-group m-l-20">
+                                <button type="button" class="btn btn-default btn-sm" onclick="rotatePaper()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> 旋转</button>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="clearTemplate()"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span> 清空</button>
+                            <button type="button" class="btn btn-success btn-sm" id="A4_preview"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 预览</button>
+                            <button type="button" class="btn btn-primary btn-sm" id="A4_directPrint"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> 打印</button>
+                        </div>
                     </div>
-                    <div id="hiprint-printTemplate" class="hiprint-printTemplate" style="margin-top:20px;"></div>
+                    <div id="hiprint-printTemplate" class="hiprint-printTemplate rc" style="padding:20px; overflow-x: scroll; overflow-y: auto;"></div>
                 </div>
                 <div class="col-sm-3 col-md-2">
                     <div id="PrintElementOptionSetting"></div>
                 </div>
             </div>
         </div>
+
+        <!-- 弹出预览窗 -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document" style="width: 825px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">打印预览</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="prevViewDiv"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" id="bill_print"><span class="glyphicon glyphicon-print"></span> 打印</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> 关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- 创建拖拽元素时动态生成的dom元素 -->
-        <script src="./custom_test/custom-etype-provider.js"></script>
+        <script src="./custom/custom-etype-provider.js"></script>
         <!-- 默认模板数据 -->
-        <!-- <script src="./custom_test/custom-print-json.js"></script> -->
+        <!-- <script src="./custom/custom-print-json.js"></script> -->
         <script type="text/javascript">
             var hiprintTemplate;
             $(document).ready(function () {
@@ -157,6 +182,26 @@
                 //打印设计
                 hiprintTemplate.design('#hiprint-printTemplate');
 
+                $('#A4_preview').click(function () {
+                    $('#myModal .modal-body .prevViewDiv').html(hiprintTemplate.getHtml({}));
+                    $('#myModal').modal('show');
+                });
+
+                $('#A4_directPrint').click(function () {
+                    hiprintTemplate.print(printData);
+                });
+                $('#A4_printByHtml').click(function () {
+                    hiprintTemplate.printByHtml($('#myModal .modal-body .prevViewDiv'));
+                })
+                $('#A4_getJson_toTextarea').click(function () {
+                    $('#A4_textarea_json').html(JSON.stringify(hiprintTemplate.getJson()))
+                })
+                $('#A4_getHtml_toTextarea').click(function () {
+                    $('#A4_textarea_html').val(hiprintTemplate.getHtml(printData)[0].outerHTML)
+                })
+
+                // 设置初始纸张尺寸
+                setPaper('322', '130');
                 // 页面初始化完成后展示页面配置区域
                 $('.hiprint-printPanel').click();
                 // 自定义监听脚本
@@ -167,6 +212,23 @@
                     }
                 }
             });
+
+            //调整纸张
+            var setPaper = function (paperTypeOrWidth, height) {
+                hiprintTemplate.setPaper(paperTypeOrWidth, height);
+                $('#customWidth').val('');
+                $('#customHeight').val('');
+            }
+
+            //纸张
+            var rotatePaper = function () {
+                hiprintTemplate.rotatePaper();
+            }
+
+            // 清空模板
+            var clearTemplate = function () {
+                hiprintTemplate.clear();
+            }
         </script>
     </body>
 </html>
