@@ -127,13 +127,20 @@
                         <div class="pull-right">
                             <button type="button" class="btn btn-danger btn-sm" onclick="clearTemplate()"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span> 清空</button>
                             <button type="button" class="btn btn-success btn-sm" id="A4_preview"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 预览</button>
-                            <button type="button" class="btn btn-primary btn-sm" id="A4_directPrint"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> 打印</button>
+                            <button type="button" class="btn btn-primary btn-sm" id="pagePrint"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> 打印</button>
                         </div>
                     </div>
-                    <div id="hiprint-printTemplate" class="hiprint-printTemplate rc" style="padding:20px; overflow-x: scroll; overflow-y: auto;"></div>
+                    <div class="editor-panel m-t-10 rc">
+                        <div id="hiprint-printTemplate" class="hiprint-printTemplate"></div>
+                    </div>
+                    <p class="text-right">
+                        <button type="button" class="btn btn-success" id="getJson2Textarea"><span class="glyphicon glyphicon-duplicate"></span> 生成模板JSON</button>
+                    </p>
+                    <!-- <h4><span class="glyphicon glyphicon-duplicate"></span> 模板JSON</h4> -->
+                    <textarea name="name" class="form-control" rows="8" id="textareaJson"></textarea>
                 </div>
                 <div class="col-sm-3 col-md-2">
-                    <div id="PrintElementOptionSetting"></div>
+                    <div id="PrintElementOptionSetting" class="editor-config-panel rc"></div>
                 </div>
             </div>
         </div>
@@ -182,26 +189,28 @@
                 //打印设计
                 hiprintTemplate.design('#hiprint-printTemplate');
 
+                // 预览
                 $('#A4_preview').click(function () {
                     $('#myModal .modal-body .prevViewDiv').html(hiprintTemplate.getHtml({}));
                     $('#myModal').modal('show');
                 });
 
-                $('#A4_directPrint').click(function () {
-                    hiprintTemplate.print(printData);
+                // 打印
+                $('#pagePrint').click(function () {
+                    hiprintTemplate.print({img: 'file:///C:/Users/YK-076/Desktop/1bdd4cccfb760979281e6ae0bdc5504f.jpg'});
                 });
-                $('#A4_printByHtml').click(function () {
+                $('#bill_print').click(function () {
                     hiprintTemplate.printByHtml($('#myModal .modal-body .prevViewDiv'));
-                })
-                $('#A4_getJson_toTextarea').click(function () {
-                    $('#A4_textarea_json').html(JSON.stringify(hiprintTemplate.getJson()))
-                })
-                $('#A4_getHtml_toTextarea').click(function () {
-                    $('#A4_textarea_html').val(hiprintTemplate.getHtml(printData)[0].outerHTML)
-                })
+                });
+
+                $('#getJson2Textarea').click(function () {
+                    $('#textareaJson').html(JSON.stringify(hiprintTemplate.getJson()))
+                });
+
 
                 // 设置初始纸张尺寸
-                setPaper('322', '130');
+                // setPaper('322', '120');
+
                 // 页面初始化完成后展示页面配置区域
                 $('.hiprint-printPanel').click();
                 // 自定义监听脚本
