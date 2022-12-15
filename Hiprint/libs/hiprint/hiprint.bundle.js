@@ -1,6 +1,6 @@
 /**
  * jQuery Hiprint 2.5.4
- * 
+ *
  * Copyright (c) 2016-2021 www.hinnn.com. All rights reserved.
  *
  * Licensed under the LGPL or commercial licenses
@@ -8,7 +8,7 @@
  *
  */
 
- 
+
 
 "use strict";
 
@@ -7179,6 +7179,7 @@ var hiprint = function (t) {
                     i.submitOption();
                 }), p.bind("click.deleteBtn", function () {
                     n.printTemplate.deletePrintElement(i);
+                    
                 }), r.find(".auto-submit").change(function (t) {
                     i.submitOption();
                 }), r.find(".auto-submit:input").bind("keydown.submitOption", function (t) {
