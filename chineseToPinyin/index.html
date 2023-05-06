@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中文转拼音</title>
+    <script src="./pinyin-pro/dist/index.js"></script>
+</head>
+<body>
+    <script type="module">
+        import { pinyin } from 'pinyin-pro';
+        // 获取带音调拼音
+        console.log(pinyin('汉语拼音')); // 'hàn yǔ pīn yīn'
+
+        // 获取数组形式带音调拼音
+        console.log(pinyin('汉语拼音', { type: 'array' })); // ["hàn", "yǔ", "pīn", "yīn"]
+
+        // 获取数组形式不带声调的拼音
+        console.log(pinyin('汉语拼音', { toneType: 'none', type: 'array' })); // ["han", "yu", "pin", "yin"]
+
+        // 获取带音调韵母
+        console.log(pinyin('汉语拼音', { pattern: 'final' })); // 'àn ǔ īn īn'
+    </script>
+</body>
+</html>
