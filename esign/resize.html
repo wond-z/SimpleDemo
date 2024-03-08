@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sketchpad demo</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        #root {
+            width: 100%;
+            height: 100%;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root" >
+        <canvas id="canvas"></canvas>
+    </div>
+    <script type="text/javascript">
+        let isDown = false;
+        let points = [];
+        let beginPoint = null;
+        const canvas = document.querySelector('#canvas');
+        const ctx = canvas.getContext('2d');
+
+        // 记录容器初始加载尺寸
+        const originWidth = canvas.parentElement.offsetWidth;
+        const originHeight = canvas.parentElement.offsetHeight - 2;
+
+        canvas.width = originWidth;
+        canvas.height = originHeight;
+        // 记录页面尺寸变化后的宽度和高度的变化率（当前尺寸/原始尺寸）
+        let scaleW = 1;
+        let scaleH = 1;
+
+        // 设置线条颜色
+        // ctx.strokeStyle = 'red';
+        ctx.lineWidth = 4;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
+        canvas.addEventListener('mousedown', down, false);
+        canvas.addEventListener('mousemove', move, false);
+        canvas.addEventListener('mouseup', up, false);
+        canvas.addEventListener('mouseout', up, false);
+
+        function down(evt) {
+            isDown = true;
+            const { x, y } = getPos(evt);
+            points.push({ x, y });
+            beginPoint = { x, y };
+        }
+
+        function move(evt) {
+            if (!isDown) return;
+
+            const { x, y } = getPos(evt);
+            points.push({ x, y });
+
+            if (points.length > 3) {
+                const lastTwoPoints = points.slice(-2);
+                const controlPoint = lastTwoPoints[0];
+                const endPoint = {
+                    x: (lastTwoPoints[0].x + lastTwoPoints[1].x) / 2,
+                    y: (lastTwoPoints[0].y + lastTwoPoints[1].y) / 2,
+                }
+                drawLine(beginPoint, controlPoint, endPoint);
+                beginPoint = endPoint;
+            }
+        }
+
+        function up(evt) {
+            if (!isDown) return;
+            const { x, y } = getPos(evt);
+            points.push({ x, y });
+
+            if (points.length > 3) {
+                const lastTwoPoints = points.slice(-2);
+                const controlPoint = lastTwoPoints[0];
+                const endPoint = lastTwoPoints[1];
+                drawLine(beginPoint, controlPoint, endPoint);
+            }
+            beginPoint = null;
+            isDown = false;
+            points = [];
+        }
+
+        function getPos(evt) {
+            return {
+                x: evt.clientX,
+                y: evt.clientY
+            }
+        }
+
+        function drawLine(beginPoint, controlPoint, endPoint) {
+            ctx.beginPath();
+            ctx.moveTo(beginPoint.x / scaleW, beginPoint.y / scaleH);
+            ctx.quadraticCurveTo(controlPoint.x / scaleW, controlPoint.y / scaleH, endPoint.x / scaleW, endPoint.y / scaleH);
+            ctx.strokeStyle = 'green';
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        // const Height = canvas.parentElement.offsetHeight;
+        // const Width = function() {
+        //     let width = 704; // 如果屏幕【太宽】，就会用这个宽度
+        //     const { innerWidth, innerHeight } = window; // 获取初始页面尺寸
+        //     if (innerHeight > innerWidth * 1.3) { // 如果初始页面尺寸不是【太宽】
+        //         width = Height * innerWidth / innerHeight;  // canvas宽高比就跟初始页面宽高比保持一致
+        //         if (width < 320) width = 320; // 如果发现屏幕【太窄】，就设置一个极限最小宽度
+        //     }
+        //     return width;
+        // }
+        // const root = document.getElementById('root');
+
+        
+
+        // const resetSize = () => {
+        //     const { innerWidth, innerHeight } = window;
+        //     if (innerWidth / innerHeight > Width / Height) { // 如果放缩后屏幕【宽】，就用屏幕高度计算放缩
+        //         root.style.height = `${innerHeight}px`; // 高度撑满
+        //         root.style.width = `${innerHeight / Height * Width}px`;
+        //         // 设置新算出来的scale
+        //         canvas.style.transform = `scale(${innerHeight / Height})`;
+        //     } else { // 如果放缩后屏幕【窄】，就用屏幕宽度计算放缩
+        //         root.style.width = `${innerWidth}px`; // 宽度撑满
+        //         root.style.height = `${innerWidth / Width * Height}px`;
+        //         // 设置新算出来的scale
+        //         canvas.style.transform = `scale(${innerWidth / Width})`;
+        //     }
+        // };
+
+        // canvas.style.width = `${Width}px`;
+        // canvas.style.height = `${Height}px`;
+        // resetSize(); // 页面初始时，执行一次，设定canvas的样式
+
+        
+        const resetSize = () => {
+            const currentWidth = canvas.parentElement.offsetWidth;
+            const currentHeight = canvas.parentElement.offsetHeight - 2;
+
+            scaleW = currentWidth / originWidth;
+            scaleH = currentHeight / originHeight;
+
+        }
+        window.onresize = resetSize;
+
+    </script>
+</body>
+
+</html>
