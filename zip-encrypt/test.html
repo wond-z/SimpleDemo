@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Create a zip file (demo zip.js)</title>
+	<meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+	<button id="file-input-button">Add files...</button>
+	<input type="file" multiple id="file-input" hidden>
+	</div>
+	<script type="text/javascript" src="./@zip.js/zip.js/dist/zip.min.js"></script>
+	<script>
+        const fileInput = document.getElementById("file-input");
+        const fileInputButton = document.getElementById("file-input-button");
+        fileInputButton.addEventListener("click", () => fileInput.dispatchEvent(new MouseEvent("click")), false);
+        fileInput.onchange = selectFiles;
+
+        const controller = new AbortController();
+		const signal = controller.signal;
+
+        let zipWriter = new zip.ZipWriter(new zip.BlobWriter("application/zip"), { bufferedWrite: true, useCompressionStream: false });
+
+        async function selectFiles() {
+			try {
+                const file = fileInput.files[0];
+                console.log(file);
+                
+				await zipWriter.add(file.name, new zip.BlobReader(file), {
+                    password: '123', // 设置密码
+                    signal,
+                    onstart(max) {
+                        console.log(max);
+                    },
+                    onprogress(index, max) {
+                        console.log(index);
+                        console.log(max);
+                    }
+                });
+
+                const blobURL = URL.createObjectURL(await zipWriter.close());
+                const anchor = document.createElement("a");
+				const clickEvent = new MouseEvent("click");
+				anchor.href = blobURL;
+				anchor.download = 'Download.zip'; // 下载名称
+				anchor.dispatchEvent(clickEvent);
+			} catch (error) {
+				alert(error);
+			}
+		}
+    </script>
+</body>
+
+</html>
