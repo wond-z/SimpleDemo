@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas中添加svg</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="500"></canvas>
+    <script>
+        function draw() {
+            var img = new Image();
+            img.src = 'test.svg';
+            // document.body.appendChild(img);
+            img.onload = function () {
+                var canvas = document.getElementById('canvas');
+                var cxt = canvas.getContext('2d');
+                var width = img.width;
+                var height = img.height;
+                var x = 2;
+                var y = 2;
+                cxt.drawImage(img, x, y, width, height);
+            };
+        }
+        draw();
+    </script>
+</body>
+
+</html>
