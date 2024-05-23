@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>签字板demo1</title>
+    <style type="text/css">
+        canvas {
+            border: 1px blue solid;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="500"></canvas>
+    <script type="text/javascript">
+
+        // 设置画布及涉及状态
+        const canvas = document.querySelector('#canvas');
+        const ctx = canvas.getContext('2d');
+        let isDown = false;
+        let beginPoint = null;
+
+        // 设置线条颜色
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 10;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'bevel';
+
+
+        // 绘制
+        function drawLine() {
+            ctx.beginPath();
+            ctx.moveTo(0, 0); // Move pen to bottom-left corner
+            ctx.lineTo(200, 100); // Line to top corner
+            ctx.lineTo(320, 340); // Line to bottom-right corner
+            ctx.closePath(); // Line to bottom-left corner
+            ctx.stroke();
+        }
+
+        drawLine();
+    </script>
+</body>
+
+</html>

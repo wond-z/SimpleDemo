@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>签字板demo1</title>
+	<style type="text/css">
+		canvas {
+			border: 1px blue solid; 
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="800" height="500"></canvas>
+	<script type="text/javascript">
+
+		// 设置画布及涉及状态
+		const canvas = document.querySelector('#canvas');
+		const ctx = canvas.getContext('2d');
+		let isDown = false;
+		let beginPoint = null;
+
+		// 设置线条颜色
+		ctx.strokeStyle = 'red';
+		ctx.lineWidth = 10;
+		ctx.lineJoin = 'round';
+		ctx.lineCap = 'bevel';
+
+		// 鼠标事件绑定
+		canvas.addEventListener('mousedown', down, false);
+		canvas.addEventListener('mousemove', move, false);
+		canvas.addEventListener('mouseup', up, false);
+		canvas.addEventListener('mouseout', up, false);
+
+		// 鼠标按下
+		function down(evt) {
+			isDown = true;
+			beginPoint = getPos(evt);
+		}
+		// 鼠标移动
+		function move(evt) {
+			if (!isDown) return;
+			const endPoint = getPos(evt);
+			drawLine(beginPoint, endPoint);
+			beginPoint = endPoint;
+		}
+		// 鼠标抬起
+		function up(evt) {
+			if (!isDown) return;
+			
+			const endPoint = getPos(evt);
+			drawLine(beginPoint, endPoint);
+
+			beginPoint = null;
+			isDown = false;
+		}
+
+		function getPos(evt) {
+			return {
+				x: evt.clientX,
+				y: evt.clientY
+			}
+		}
+
+		// 绘制
+		function drawLine(beginPoint, endPoint) {
+			ctx.beginPath();
+			ctx.moveTo(beginPoint.x, beginPoint.y);
+			ctx.lineTo(endPoint.x, endPoint.y);
+			ctx.closePath();
+			ctx.stroke();
+		}
+
+	</script>
+</body>
+</html>
