@@ -9,12 +9,15 @@
         :root {
             /* 亮色模式下的背景色 */
             --bg-color: #fff;
+            --h1-color: grey;
             background-color: var(--bg-color);
+            color: var(--h1-color);
         }
 
         :root.dark {
             /* 暗色模式下的背景色 */
             --bg-color: #000;
+            --h1-color: #fff;
         }
 
         ::view-transition-new(root),
@@ -31,6 +34,8 @@
 
 <body>
     <button id="btn">切换主题</button>
+    <h1 class="h1">主题切换测试，这是一条很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的字符串。</h1>
+    <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.4SPZVrcvZ-Tunx4G4FFtRAAAAA?rs=1&pid=ImgDetMain" alt="">
     <script>
         const btn = document.getElementById('btn')
         // 点击按钮时切换主题
